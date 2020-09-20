@@ -1,0 +1,55 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<BorderPane fx:id="mainWindow" fx:controller="com.todo.app.controller.Controller"
+            xmlns:fx="http://javafx.com/fxml">
+
+    <left>
+        <ListView fx:id="todoListView"/>
+    </left>
+
+    <top>
+        <MenuBar>
+            <Menu text="File">
+                <items>
+                    <MenuItem text="New" onAction="#showAddItemDialog"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem text="Close"/>
+                </items>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <center>
+        <VBox>
+            <HBox>
+                <padding>
+                    <Insets top="10" bottom="10" left="10" right="10"/>
+                </padding>
+                <Label fx:id="todoTitle">
+                    <font>
+                        <Font size="18" name="Arial Bold"/>
+                    </font>
+                </Label>
+            </HBox>
+            <TextArea fx:id="todoDescriptionArea" VBox.vgrow="ALWAYS" wrapText="true"/>
+            <HBox>
+                <padding>
+                    <Insets top="10" left="10" bottom="10"/>
+                </padding>
+                <Label text="Due: ">
+                    <font>
+                        <Font size="18" name="Arial"/>
+                    </font>
+                </Label>
+                <Label fx:id="dueDateLabel">
+                    <font>
+                        <Font size="18" name="Arial"/>
+                    </font>
+                </Label>
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

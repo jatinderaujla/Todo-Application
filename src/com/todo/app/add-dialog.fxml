@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<DialogPane fx:id="addTodoItemDialog" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.todo.app.controller.DialogController">
+    <padding>
+        <Insets top="16" left="16" bottom="16" right="16"/>
+    </padding>
+    <headerText>
+        Add new Todo Item in the List
+    </headerText>
+    <content>
+        <GridPane vgap="10" hgap="10">
+            <Label text="Title: " GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="title" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <Label text="Description: " GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextArea fx:id="description" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Due Date: " GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <DatePicker fx:id="dueDate" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        </GridPane>
+    </content>
+
+</DialogPane>
