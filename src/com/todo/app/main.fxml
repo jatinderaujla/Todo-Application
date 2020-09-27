@@ -6,7 +6,7 @@
             xmlns:fx="http://javafx.com/fxml">
 
     <left>
-        <ListView fx:id="todoListView"/>
+        <ListView fx:id="todoListView" onKeyReleased="#handleKeyPressed"/>
     </left>
 
     <top>

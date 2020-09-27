@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
@@ -154,13 +156,28 @@ public class Controller {
     public void deleteTodoItem(Todo item){
         Alert deleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
         deleteAlert.setTitle("Delete Todo item");
-        deleteAlert.setHeaderText("Are you sure you wants to delete "+ item.getTitle() + " menu item ?");
+        deleteAlert.setHeaderText("Item name: "+item.getTitle());
+        deleteAlert.setContentText("Are you sure you wants to delete menu item ?");
         Optional<ButtonType> deleteResult = deleteAlert.showAndWait();
         if(deleteResult.isPresent() && deleteResult.get() ==ButtonType.OK){
-            System.out.println("ok is pressed");
             //remove the todoList item from the TodoItem list
             TodoApp.getInstance().deleteTodoItem(item);
         }
+    }
+
+    /***
+     * Description : Delete the selected item when delete button is clicked
+     * @param event
+     */
+    @FXML
+    public void handleKeyPressed(KeyEvent event){
+        Todo item = todoListView.getSelectionModel().getSelectedItem();
+        if (item != null) {
+            if(event.getCode().equals(KeyCode.DELETE)){
+                deleteTodoItem(item);
+            }
+        }
+
     }
 
     @Deprecated
