@@ -2,6 +2,7 @@ package com.todo.app.controller;
 
 import com.todo.app.common.TodoApp;
 import com.todo.app.model.Todo;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.transformation.FilteredList;
@@ -238,6 +239,13 @@ public class Controller {
             todoListView.getSelectionModel().select(item);
         }
 
+    }
+
+    /***
+     * Description: application exit handler to close the application
+     */
+    public void appExitHandler(){
+        Platform.exit();
     }
 
     @Deprecated
