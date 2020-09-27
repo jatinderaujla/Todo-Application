@@ -25,7 +25,7 @@
 
             <ToolBar>
                 <HBox>
-                    <Button text="Add Item" onAction="#showAddItemDialog">
+                    <Button onAction="#showAddItemDialog">
                         <tooltip>
                             <Tooltip text="Add new todo item."/>
                         </tooltip>
