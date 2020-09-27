@@ -1,5 +1,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <BorderPane fx:id="mainWindow" fx:controller="com.todo.app.controller.Controller"
@@ -10,15 +12,32 @@
     </left>
 
     <top>
-        <MenuBar>
-            <Menu text="File">
-                <items>
-                    <MenuItem text="New" onAction="#showAddItemDialog"/>
-                    <SeparatorMenuItem/>
-                    <MenuItem text="Close"/>
-                </items>
-            </Menu>
-        </MenuBar>
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="New" onAction="#showAddItemDialog"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Close"/>
+                    </items>
+                </Menu>
+            </MenuBar>
+
+            <ToolBar>
+                <HBox>
+                    <Button text="Add Item" onAction="#showAddItemDialog">
+                        <tooltip>
+                            <Tooltip text="Add new todo item."/>
+                        </tooltip>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@/toolbarButtonGraphics/general/New24.gif"/>
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                </HBox>
+            </ToolBar>
+        </VBox>
     </top>
 
     <center>
