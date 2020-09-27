@@ -7,3 +7,6 @@
 7,Learn Dialog Pane,I have learnt the dialog pane and learn how to add item to list using dialog pane.,2020-09-21
 8,Add New Item,I will test the new item to be added in the left sidebar of application on newly created todoitem. It will add the item to list and it will add item in left side bar as well,2020-09-03
 9,Learn new concepts,I have done adding new item and make it selected by default. Now lets move to the next topic,2020-09-21
+10,Cell Factory,Learn how to create cell factory and change the color of the list item having higher priority,2020-09-25
+11,Upcoming Events,Upcoming event test and check the color of the upcoming events,2020-09-28
+12,Test my new event,Learn how to create a website with me on youtube,2020-09-29

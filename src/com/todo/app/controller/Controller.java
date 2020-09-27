@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -58,12 +60,37 @@ public class Controller {
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         /*by default make first element of list view to be selected*/
         todoListView.getSelectionModel().selectFirst();
+
+        /*create a cell factory to color some of the column having higher priority*/
+        todoListView.setCellFactory(new Callback<ListView<Todo>, ListCell<Todo>>() {
+            @Override
+            public ListCell<Todo> call(ListView<Todo> param) {
+                ListCell<Todo> todoListCell = new ListCell<Todo>(){
+                    @Override
+                    protected void updateItem(Todo item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if(empty){
+                            setText(null);
+                        }else{
+                            setText(item.getTitle());
+                            if(item.getDueDate().isBefore(LocalDate.now().plusDays(1))){
+                                setTextFill(Color.RED);
+                            }else if(item.getDueDate().equals(LocalDate.now().plusDays(1))){
+                                setTextFill(Color.GREEN);
+                            }
+                        }
+                    }
+                };
+                return todoListCell;
+            }
+        });
     }
 
     @FXML
     public void showAddItemDialog(){
         Dialog<ButtonType> addItemDialog = new Dialog<>();
         addItemDialog.setTitle("Add Todo Item");
+        addItemDialog.setHeaderText("Enter data to add new todo item.");
         addItemDialog.initOwner(mainWindow.getScene().getWindow());
         FXMLLoader uiLoader = new FXMLLoader();
         uiLoader.setLocation(getClass().getResource("../add-dialog.fxml"));

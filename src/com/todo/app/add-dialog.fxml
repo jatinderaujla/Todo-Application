@@ -9,9 +9,12 @@
     <padding>
         <Insets top="16" left="16" bottom="16" right="16"/>
     </padding>
-    <headerText>
+
+    <!-- header text will show up inside the dialog with the below UI elements -->
+    <!--<headerText>
         Add new Todo Item in the List
-    </headerText>
+    </headerText>-->
+
     <content>
         <GridPane vgap="10" hgap="10">
             <Label text="Title: " GridPane.rowIndex="0" GridPane.columnIndex="0"/>

@@ -51,8 +51,9 @@ public class Todo {
         this.dueDate = dueDate;
     }
 
-    @Override
-    public String toString() {
-        return title;
-    }
+//    @Override
+//    public String toString() {
+//        return title;
+//    }
+
 }
