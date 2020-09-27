@@ -35,6 +35,16 @@
                             </ImageView>
                         </graphic>
                     </Button>
+                    <ToggleButton text="Toogle" fx:id="filterTodoItem" onAction="#todoItemFilterHandler">
+                        <tooltip>
+                            <Tooltip text="Button Down: Show Today's Item Only. Button Up: Show all items"/>
+                        </tooltip>
+                        <graphic>
+                            <ImageView>
+                                <Image url="@/toolbarButtonGraphics/general/New24.gif"/>
+                            </ImageView>
+                        </graphic>
+                    </ToggleButton>
                 </HBox>
             </ToolBar>
         </VBox>

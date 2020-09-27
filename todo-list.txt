@@ -5,4 +5,4 @@
 5,Work on CA Project,Create some UI and do some backend stuff to manage the event of CA department as for client requirements.,2020-04-21
 6,Create Presentation for Training,Create new presentation on template given by deepak sir for somya a new team member of our Pinakey Frontend IT team,2020-09-21
 7,Add New Item,I will test the new item to be added in the left sidebar of application on newly created todoitem. It will add the item to list and it will add item in left side bar as well,2020-09-03
-8,Learn new concepts,I have done adding new item and make it selected by default. Now lets move to the next topic,2020-09-21
+8,Todo Item added,new item added to list,2020-09-27

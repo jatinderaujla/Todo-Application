@@ -4,6 +4,8 @@ import com.todo.app.common.TodoApp;
 import com.todo.app.model.Todo;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,6 +22,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class Controller {
     @FXML
@@ -34,6 +37,13 @@ public class Controller {
     private BorderPane mainWindow;
     @FXML
     private ContextMenu contextMenu;
+    @FXML
+    private ToggleButton filterTodoItem;
+
+    private Predicate<Todo> showAllItems;
+    private Predicate<Todo> showTodaysItems;
+    private FilteredList todoFilteredList;
+
 
 
     private DateTimeFormatter dateTimeFormatter;
@@ -68,9 +78,35 @@ public class Controller {
                 }
             }
         });
+        /*Add filter to data*/
+        //show all items by default
+        showAllItems = new Predicate<Todo>() {
+            @Override
+            public boolean test(Todo todo) {
+                return true;
+            }
+        };
+
+        showTodaysItems = new Predicate<Todo>() {
+            @Override
+            public boolean test(Todo item) {
+                return (item.getDueDate().equals(LocalDate.now()));
+            }
+        };
+
+        todoFilteredList = new FilteredList(TodoApp.getInstance().getTodoList());
+
+        /*Sort the todoListItem and populate the list view from this sorted item*/
+        SortedList<Todo> todoSortedList = new SortedList<Todo>(todoFilteredList,
+                (item1, item2) ->{
+                     return item1.getDueDate().compareTo(item2.getDueDate());
+                }
+        );
+        //add sorted todoListItem to list view
+        todoListView.setItems(todoSortedList);
 
         /*add list item to list view*/
-        todoListView.setItems(TodoApp.getInstance().getTodoList());
+//        todoListView.setItems(TodoApp.getInstance().getTodoList());
 
         /*set selection mode to single*/
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -176,6 +212,30 @@ public class Controller {
             if(event.getCode().equals(KeyCode.DELETE)){
                 deleteTodoItem(item);
             }
+        }
+
+    }
+
+    /***
+     * Description: TodoItem list filter toggle handler method will filter the todoItem list
+     */
+    @FXML
+    public void todoItemFilterHandler(){
+        Todo item = todoListView.getSelectionModel().getSelectedItem();
+        if(filterTodoItem.isSelected()){
+            todoFilteredList.setPredicate(showTodaysItems);
+            if (todoFilteredList.isEmpty()) {
+                todoTitle.setText("");
+                todoDescriptionArea.clear();
+                dueDateLabel.setText("");
+            }else if (todoFilteredList.contains(item)){
+                todoListView.getSelectionModel().select(item);
+            }else{
+                todoListView.getSelectionModel().selectFirst();
+            }
+        }else{
+            todoFilteredList.setPredicate(showAllItems);
+            todoListView.getSelectionModel().select(item);
         }
 
     }
