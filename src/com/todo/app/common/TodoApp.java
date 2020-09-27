@@ -83,4 +83,12 @@ public class TodoApp {
         }
     }
 
+    /***
+     * Description: Delete  TodoItem from the list
+     * @param item
+     */
+    public void deleteTodoItem(Todo item){
+        todoList.remove(item);
+    }
+
 }

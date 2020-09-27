@@ -4,6 +4,8 @@ import com.todo.app.common.TodoApp;
 import com.todo.app.model.Todo;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,6 +30,8 @@ public class Controller {
     private Label todoTitle;
     @FXML
     private BorderPane mainWindow;
+    @FXML
+    private ContextMenu contextMenu;
 
 
     private DateTimeFormatter dateTimeFormatter;
@@ -39,6 +43,16 @@ public class Controller {
 
     /*This method will automatically get invoke when application start it will initialize the content in given fxml UI*/
     public void initialize(){
+        contextMenu = new ContextMenu();
+        MenuItem deleteMenuItem = new MenuItem("Delete");
+        deleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Todo item = todoListView.getSelectionModel().getSelectedItem();
+                deleteTodoItem(item);
+            }
+        });
+        contextMenu.getItems().setAll(deleteMenuItem);
         /*add event listener on the list view and show first list view item by default and show in text area */
         todoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Todo>() {
             @Override
@@ -81,6 +95,17 @@ public class Controller {
                         }
                     }
                 };
+
+                /*bind context menu with the list view item if the item is empty or delete then do not bind the context menu
+                * other wise bind the context menu to the list view item.
+                */
+                todoListCell.emptyProperty().addListener((observable, wasEmpty, isNowEmpty)->{
+                    if(isNowEmpty){
+                        todoListCell.setContextMenu(null);
+                    }else{
+                        todoListCell.setContextMenu(contextMenu);
+                    }
+                });
                 return todoListCell;
             }
         });
@@ -119,6 +144,22 @@ public class Controller {
 
             //select the newly added item by default after adding
             todoListView.getSelectionModel().select(addedItem);
+        }
+    }
+
+    /***
+     * Description : show the confirmation alert box to user if ok is pressed then delete the menu item other wise do nothing
+     * @param item
+     */
+    public void deleteTodoItem(Todo item){
+        Alert deleteAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        deleteAlert.setTitle("Delete Todo item");
+        deleteAlert.setHeaderText("Are you sure you wants to delete "+ item.getTitle() + " menu item ?");
+        Optional<ButtonType> deleteResult = deleteAlert.showAndWait();
+        if(deleteResult.isPresent() && deleteResult.get() ==ButtonType.OK){
+            System.out.println("ok is pressed");
+            //remove the todoList item from the TodoItem list
+            TodoApp.getInstance().deleteTodoItem(item);
         }
     }
 
