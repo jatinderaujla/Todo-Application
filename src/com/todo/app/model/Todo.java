@@ -1,7 +1,10 @@
 package com.todo.app.model;
 
 import java.time.LocalDate;
-
+/***
+ * @author Jatinder
+ * @since 2020
+ */
 public class Todo {
     private int id;
     private String title;

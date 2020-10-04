@@ -13,7 +13,10 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
-
+/***
+ * @author Jatinder
+ * @since 2020
+ */
 public class TodoApp {
     private static TodoApp instance = new TodoApp();
     private String todoFileName = "todo-list.txt";

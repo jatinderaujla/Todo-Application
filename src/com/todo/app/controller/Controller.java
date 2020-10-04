@@ -24,7 +24,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.function.Predicate;
-
+/***
+ * @author Jatinder
+ * @since 2020
+ */
 public class Controller {
     @FXML
     private ListView<Todo> todoListView;
